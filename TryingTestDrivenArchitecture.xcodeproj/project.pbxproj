@@ -14,6 +14,7 @@
 		0DFC79862055E566005440FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DFC79842055E566005440FD /* LaunchScreen.storyboard */; };
 		0DFC79912055E566005440FD /* TryingTestDrivenArchitectureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC79902055E566005440FD /* TryingTestDrivenArchitectureTests.swift */; };
 		0DFC799C2055E566005440FD /* TryingTestDrivenArchitectureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC799B2055E566005440FD /* TryingTestDrivenArchitectureUITests.swift */; };
+		0DFC79AA2056C0A8005440FD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DFC79A92056C0A8005440FD /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		0DFC79972055E566005440FD /* TryingTestDrivenArchitectureUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TryingTestDrivenArchitectureUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DFC799B2055E566005440FD /* TryingTestDrivenArchitectureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TryingTestDrivenArchitectureUITests.swift; sourceTree = "<group>"; };
 		0DFC799D2055E566005440FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0DFC79A92056C0A8005440FD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				0DFC79822055E566005440FD /* Assets.xcassets */,
 				0DFC79842055E566005440FD /* LaunchScreen.storyboard */,
 				0DFC79872055E566005440FD /* Info.plist */,
+				0DFC79A92056C0A8005440FD /* LoginViewModel.swift */,
 			);
 			path = TryingTestDrivenArchitecture;
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			files = (
 				0DFC797E2055E566005440FD /* ViewController.swift in Sources */,
 				0DFC797C2055E566005440FD /* AppDelegate.swift in Sources */,
+				0DFC79AA2056C0A8005440FD /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

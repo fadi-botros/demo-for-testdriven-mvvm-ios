@@ -22,10 +22,10 @@ struct SimpleCriteria {
     let phone: String
     
     init(userName: String, email: String, phone: String) {
-        super.init()
         self.userName = userName
         self.email = email
         self.phone = phone
+        super.init()
     }
 }
 
@@ -37,7 +37,7 @@ class FakeLoginRepository: LoginRepository {
             } else if userNamePassword.userName == "secondUser" && userNamePassword.password == "secondPass" {
                 completion(UserData(userName: "secondUser", email: "user2@users.com", phone: "87654321"), nil)
             } else {
-                completion(nil, LoginRepository.errorFactory())
+                completion(nil, LoginRepositoryUtil.errorFactory())
             }
         }
     }
@@ -62,8 +62,8 @@ class LoginViewModelTests: XCTestCase {
     }
     
     private func commonLoginTest(todoWithViewModel: (LoginViewModel) -> (),
-                                 then: (LoginViewModel) -> ()) {
-        var loginViewModel = LoginViewModel()
+                                then: (LoginViewModel) -> ()) {
+        let loginViewModel = LoginViewModel()
         let loggedUserExpectation = XCTKVOExpectation(keyPath: "loggedUser", object: loginViewModel)
         let errorExpectation = XCTKVOExpectation(keyPath: "error", object: loginViewModel)
         todoWithViewModel(loginViewModel)
@@ -76,9 +76,9 @@ class LoginViewModelTests: XCTestCase {
             loginViewModel.login(criteria: SimpleCriteria(userName: "firstUser", password: "firstPass"),
                                  using: fakeRepository!)
         }) { loginViewModel in
-            XCTAssertEqual(loginViewModel.loggedUser.userName, "firstUser")
-            XCTAssertEqual(loginViewModel.loggedUser.email, "user1@users.com")
-            XCTAssertEqual(loginViewModel.loggedUser.phone, "12345678")
+            XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.userName, "firstUser")
+            XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.email, "user1@users.com")
+            XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.phone, "12345678")
             XCTAssertEqual(loginViewModel.error, nil)
         }
 
@@ -86,9 +86,9 @@ class LoginViewModelTests: XCTestCase {
             loginViewModel.login(criteria: SimpleCriteria(userName: "secondUser", password: "secondPass"),
                                  using: fakeRepository!)
         }) { loginViewModel in
-            XCTAssertEqual(loginViewModel.loggedUser.userName, "secondUser")
-            XCTAssertEqual(loginViewModel.loggedUser.email, "user2@users.com")
-            XCTAssertEqual(loginViewModel.loggedUser.phone, "87654321")
+            XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.userName, "secondUser")
+            XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.email, "user2@users.com")
+            XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.phone, "87654321")
             XCTAssertEqual(loginViewModel.error, nil)
         }
     }
@@ -99,9 +99,8 @@ class LoginViewModelTests: XCTestCase {
                                  using: fakeRepository!)
         }) { loginViewModel in
             XCTAssertEqual(loginViewModel.loggedUser, nil)
-            XCTAssertEqual(loginViewModel.error.domain == LoginRepository.errorFactory().domain)
-            XCTAssertEqual(loginViewModel.error.code == LoginRepository.errorFactory().code)
-            XCTAssertEqual(loginViewModel.error.userInfo == LoginRepository.errorFactory().userInfo)
+            XCTAssertEqual(loginViewModel.error?.domain, LoginRepositoryUtil.errorFactory().domain)
+            XCTAssertEqual(loginViewModel.error?.code, LoginRepositoryUtil.errorFactory().code)
         }
 
         commonLoginTest(todoWithViewModel: { loginViewModel in
@@ -109,9 +108,8 @@ class LoginViewModelTests: XCTestCase {
                                  using: fakeRepository!)
         }) { loginViewModel in
             XCTAssertEqual(loginViewModel.loggedUser, nil)
-            XCTAssertEqual(loginViewModel.error.domain == LoginRepository.errorFactory().domain)
-            XCTAssertEqual(loginViewModel.error.code == LoginRepository.errorFactory().code)
-            XCTAssertEqual(loginViewModel.error.userInfo == LoginRepository.errorFactory().userInfo)
+            XCTAssertEqual(loginViewModel.error?.domain, LoginRepositoryUtil.errorFactory().domain)
+            XCTAssertEqual(loginViewModel.error?.code, LoginRepositoryUtil.errorFactory().code)
         }
     }
 
@@ -121,8 +119,8 @@ class LoginViewModelTests: XCTestCase {
                                  using: mockRepositoryReturningError!)
         }) { loginViewModel in
             XCTAssertEqual(loginViewModel.loggedUser, nil)
-            XCTAssertEqual(loginViewModel.error.domain == NSURLErrorDomain)
-            XCTAssertEqual(loginViewModel.error.code == NSURLErrorCannotConnectToHost)
+            XCTAssertEqual(loginViewModel.error?.domain, NSURLErrorDomain)
+            XCTAssertEqual(loginViewModel.error?.code, NSURLErrorCannotConnectToHost)
         }
     }
 }
