@@ -26,10 +26,10 @@ class LoginViewModel: NSObject {
     func login<R: LoginRepository>(criteria: R.T, using: R) where R.U: NSObject {
         using.tryToLogin(userNamePassword: criteria, completion: { [weak self] user, error in
             self?.loggedUser = user
-            self?.error = error as NSError?
+            self?.error = error
         })
     }
     
     @objc dynamic var loggedUser: NSObject?
-    @objc dynamic var error: NSError?
+    @objc dynamic var error: Error?
 }

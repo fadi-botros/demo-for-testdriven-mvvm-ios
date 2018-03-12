@@ -79,7 +79,7 @@ class LoginViewModelTests: XCTestCase {
             XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.userName, "firstUser")
             XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.email, "user1@users.com")
             XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.phone, "12345678")
-            XCTAssertEqual(loginViewModel.error, nil)
+            XCTAssert(loginViewModel.error == nil)
         }
 
         commonLoginTest(todoWithViewModel: { loginViewModel in
@@ -89,7 +89,7 @@ class LoginViewModelTests: XCTestCase {
             XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.userName, "secondUser")
             XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.email, "user2@users.com")
             XCTAssertEqual((loginViewModel.loggedUser as? UserData)?.phone, "87654321")
-            XCTAssertEqual(loginViewModel.error, nil)
+            XCTAssert(loginViewModel.error == nil)
         }
     }
 
@@ -99,8 +99,8 @@ class LoginViewModelTests: XCTestCase {
                                  using: fakeRepository!)
         }) { loginViewModel in
             XCTAssertEqual(loginViewModel.loggedUser, nil)
-            XCTAssertEqual(loginViewModel.error?.domain, LoginRepositoryUtil.errorFactory().domain)
-            XCTAssertEqual(loginViewModel.error?.code, LoginRepositoryUtil.errorFactory().code)
+            XCTAssertEqual((loginViewModel.error as NSError?)?.domain, LoginRepositoryUtil.errorFactory().domain)
+            XCTAssertEqual((loginViewModel.error as NSError?)?.code, LoginRepositoryUtil.errorFactory().code)
         }
 
         commonLoginTest(todoWithViewModel: { loginViewModel in
@@ -108,8 +108,8 @@ class LoginViewModelTests: XCTestCase {
                                  using: fakeRepository!)
         }) { loginViewModel in
             XCTAssertEqual(loginViewModel.loggedUser, nil)
-            XCTAssertEqual(loginViewModel.error?.domain, LoginRepositoryUtil.errorFactory().domain)
-            XCTAssertEqual(loginViewModel.error?.code, LoginRepositoryUtil.errorFactory().code)
+            XCTAssertEqual((loginViewModel.error as NSError?)?.domain, LoginRepositoryUtil.errorFactory().domain)
+            XCTAssertEqual((loginViewModel.error as NSError?)?.code, LoginRepositoryUtil.errorFactory().code)
         }
     }
 
@@ -119,8 +119,8 @@ class LoginViewModelTests: XCTestCase {
                                  using: mockRepositoryReturningError!)
         }) { loginViewModel in
             XCTAssertEqual(loginViewModel.loggedUser, nil)
-            XCTAssertEqual(loginViewModel.error?.domain, NSURLErrorDomain)
-            XCTAssertEqual(loginViewModel.error?.code, NSURLErrorCannotConnectToHost)
+            XCTAssertEqual((loginViewModel.error as NSError?)?.domain, NSURLErrorDomain)
+            XCTAssertEqual((loginViewModel.error as NSError?)?.code, NSURLErrorCannotConnectToHost)
         }
     }
 }
